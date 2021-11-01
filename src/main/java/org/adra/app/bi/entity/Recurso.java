@@ -34,6 +34,7 @@ public class Recurso implements Serializable{
 	private String no_recurso;
 	private int nu_orden;
 	private String di_url;
+	private char es_recurso;
 	
 	@ManyToOne
 	@JoinColumn(name="id_sesion", nullable = false)

@@ -7,6 +7,8 @@ import org.adra.app.bi.entity.Alternativa;
 import org.adra.app.bi.entity.Pedido_Oracion;
 import org.adra.app.bi.entity.Persona;
 import org.adra.app.bi.entity.Pregunta;
+import org.adra.app.bi.entity.Recurso;
+import org.adra.app.bi.entity.Tipo_Recurso;
 import org.adra.app.bi.repository.AfiliacionRepository;
 import org.adra.app.bi.repository.AlternativaRepository;
 import org.adra.app.bi.repository.Banco_ComunalRepository;
@@ -101,57 +103,154 @@ public class Application implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
+		// ---- TBL_PEDIDO_ORACION ----
 		
-		
-		// Listar Pregunta
-		
+		// Listar pedido_oracion
 		
 		/*
-		List<Pregunta> preguntas = preguntaRepository.listaPreguntas();
-		for(int i=0;i<preguntas.size(); i++) {
-			System.out.println(preguntas.get(i).getDe_pregunta() + "\t" + preguntas.get(i).getRecurso().getNo_recurso());
+		List<Pedido_Oracion> pedido_oraciones = pedido_oracionRepository.listaPedido();
+		System.out.println(); 
+		for(int i=0;i<pedido_oraciones.size(); i++) {
+			System.out.println(pedido_oraciones.get(i).getDe_pedido_oracion() + "\t" + pedido_oraciones.get(i).getFe_creacion() + "\t" + pedido_oraciones.get(i).getSocio().getPersona().getNo_persona());
 		}
-		
+		System.out.println();
 		*/
 		
+		// Buscar pedido_oracion
 		
-		// Buscar Pregunta
 		
-		/*
-		 
-		Pregunta preg = preguntaRepository.buscarPregunta(5).get();
-		System.out.println("Pregunta:" + preg.getDe_pregunta() + "\t" + preg.getRecurso().getNo_recurso());
+		 /*
+		Pedido_Oracion pedido = pedido_oracionRepository.buscarPedido(4).get();
+		System.out.println("Pedido:" + pedido.getDe_pedido_oracion() + "\t" + pedido.getFe_creacion() + "\t");
 		
 		*/
 
 		
-		
-		// Insertar Pregunta
+		// Insertar pedido_oracion
 		
 		/*
-		 
-		preguntaRepository.insertarPregunta("¿Cuál es el objetivo de Instagram", 7);
+		pedido_oracionRepository.insertarPedido("Orar por Tacna", 1);
 
 		*/
 		
 		
-		// Eliminar Pregunta
+		// Eliminar pedido_oracion
 		
-		 /*
-			preguntaRepository.eliminarPregunta(5);
+		/*
+ 		  pedido_oracionRepository.eliminarPedido(5);
 		 
-		*/
+		 */
 		
-		// Actualizar Pregunta
+		
+		// Actualizar pedido_oracion
 		
 		 /*
-		  * 
-     	  preguntaRepository.actualizarPregunta("¿Cuál es el objetivo de Messenger", 7, 7);
+     	  pedido_oracionRepository.actualizarPedido("Orar por todoss", 1, 8);
 
 		 */
 		 
 		
 		
+		
+		// ---- TBL_TIPO_RECURSO ----
+		
+		// Listar tipo_recurso
+		
+		
+		/*
+		List<Tipo_Recurso> tipo_recursos = tipo_recursoRepository.listaTipoRecursos();
+		System.out.println(); 
+		for(int i=0;i<tipo_recursos.size(); i++) {
+			System.out.println(tipo_recursos.get(i).getNo_tipo_recurso());
+		}
+		System.out.println(); 
+		*/
+		
+		
+				
+		// Buscar tipo_recurso
+				
+		
+		/*		 
+		Tipo_Recurso tipo_recurso = tipo_recursoRepository.buscarTipoRecurso(5).get();
+		System.out.println("Tipo Recurso: " + tipo_recurso.getNo_tipo_recurso());
+			*/	
+		
+		
+				
+		// Insertar tipo_recurso
+				
+		/*
+		   tipo_recursoRepository.insertarTipoRecurso("Evaluacion");
+			
+		*/
+				
+		// Eliminar tipo_recurso
+				
+		/*
+		   tipo_recursoRepository.eliminarTipoRecurso(7);
+			
+		 */
+		    
+				
+				
+		// Actualizar tipo_recurso
+		
+			
+		/*
+		   tipo_recursoRepository.actualizarTipoRecurso("Documento", 4);
+				 
+		*/
+		   
+		   
+	   // ---- TBL_RECURSO ----
+
+		// Listar recurso
+			
+			
+			/*
+			List<Recurso> recursos = recursoRepository.listaRecursos();
+			System.out.println();
+			for(int i=0;i<recursos.size(); i++) {
+				System.out.println(recursos.get(i).getNo_recurso() + "\t\t"+ recursos.get(i).getNu_orden() + "\t\t"+
+						recursos.get(i).getDi_url() + "\t\t"+  recursos.get(i).getEs_recurso()  + "\t\t"+ recursos.get(i).getSesion().getDe_tema() + "\t\t"+ recursos.get(i).getTipo_recurso().getNo_tipo_recurso());
+			}
+			System.out.println();
+			*/
+			
+					
+			// Buscar recurso
+					
+			
+			/*		 
+			Recurso recurso = recursoRepository.buscarRecurso(10).get();
+			System.out.println("\nRecurso: " + recurso.getNo_recurso() + "\t\t" + recurso.getNu_orden() + "\t\t" + 
+					recurso.getDi_url()+ "\t\t"+  recurso.getEs_recurso() + "\t\t" + recurso.getSesion().getDe_tema() + "\t\t" + recurso.getTipo_recurso().getNo_tipo_recurso() + "\n");
+					
+			*/
+
+					
+			// Insertar recurso
+					
+			  /*
+			   recursoRepository.insertarRecurso("Video 10",5,"www.youtube.com",'1',2,3);
+				
+				*/	
+					
+			// Eliminar recurso
+					
+			  /*
+			   recursoRepository.eliminarRecurso(12);
+				*/ 
+			  
+					
+			// Actualizar recurso
+			
+			   /*
+			   recursoRepository.actualizarRecurso("Lectura 12",5,"www.monologos.com",'1',2,3,11);
+			  */
+			   
+			   
 	}
 
 }

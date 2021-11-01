@@ -24,9 +24,9 @@ public interface Pedido_OracionRepository extends JpaRepository<Pedido_Oracion, 
 	
 	
 	// Insertar
-	@Query(value = "{call SP_INS_TBL_PEDIDO_ORACION(:p_vDE_PEDIDO_ORACION, :p_dFE_CREACION, :p_nID_PERSONA, @V_ID)}", nativeQuery = true) 
+	@Query(value = "{call SP_INS_TBL_PEDIDO_ORACION(:p_vDE_PEDIDO_ORACION, :p_nID_PERSONA, @V_ID)}", nativeQuery = true) 
 	String insertarPedido(@Param("p_vDE_PEDIDO_ORACION") String p_vDE_PEDIDO_ORACION,
-			@Param("p_dFE_CREACION") Date p_dFE_CREACION, @Param("p_nID_PERSONA") int p_nID_PERSONA);
+			@Param("p_nID_PERSONA") int p_nID_PERSONA);
 	
 	// Eliminar
 	@Query(value = "{call SP_DEL_TBL_PEDIDO_ORACION(:p_nIDTIPORA)}", nativeQuery = true) 
@@ -34,7 +34,7 @@ public interface Pedido_OracionRepository extends JpaRepository<Pedido_Oracion, 
 	
 	
 	// Actualizar
-	@Query(value = "{call SP_UPD_TBL_PEDIDO_ORACION(:p_vDE_PEDIDO_ORACION, :p_dFE_CREACION, :p_nID_PERSONA, :p_nID_PEDIDO_ORACION, @V_OK)}", nativeQuery = true) 
+	@Query(value = "{call SP_UPD_TBL_PEDIDO_ORACION(:p_vDE_PEDIDO_ORACION, :p_nID_PERSONA, :p_nID_PEDIDO_ORACION, @V_OK)}", nativeQuery = true) 
 	String actualizarPedido(@Param("p_vDE_PEDIDO_ORACION") String p_vDE_PEDIDO_ORACION,
-			@Param("p_dFE_CREACION") Date p_dFE_CREACION, @Param("p_nID_PERSONA") int p_nID_PERSONA, @Param("p_nID_PEDIDO_ORACION") int p_nID_PEDIDO_ORACION);
+			@Param("p_nID_PERSONA") int p_nID_PERSONA, @Param("p_nID_PEDIDO_ORACION") int p_nID_PEDIDO_ORACION);
 }
