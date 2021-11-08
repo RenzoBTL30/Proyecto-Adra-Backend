@@ -2,11 +2,13 @@ package org.adra.app.bi.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,6 +36,7 @@ public class Sesion implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_sesion")
 	private int id;
+	
 	private String de_tema;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fe_inicio;
@@ -42,15 +45,17 @@ public class Sesion implements Serializable{
 	private int nu_orden;
 	private int ca_recursos;
 	
+	/*
 	@ManyToOne
 	@JoinColumn(name="id_capacitacion", nullable = false)
 	private Capacitacion capacitacion;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="id_recurso")
-	private Set<Recurso> recursos;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sesion")
+	//@JoinColumn(name="id_recurso")
+	private List<Recurso> recurso;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_sesion_socio")
 	private Set<Sesion_socio> sesion_socios;
+	*/
 }

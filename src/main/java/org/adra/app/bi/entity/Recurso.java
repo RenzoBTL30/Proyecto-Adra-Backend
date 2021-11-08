@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,14 +39,21 @@ public class Recurso implements Serializable{
 	private String di_url;
 	private char es_recurso;
 	
-	@ManyToOne
-	@JoinColumn(name="id_sesion", nullable = false)
+	/*
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	@JoinColumn(name="id_sesion", referencedColumnName = "id_sesion")
 	private Sesion sesion;
+	*/
 	
-	@ManyToOne
-	@JoinColumn(name="id_tipo_recurso", nullable = false)
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	@JoinColumn(name="id_tipo_recurso", referencedColumnName = "id_tipo_recurso")
 	private Tipo_Recurso tipo_recurso;
 	
+	
+	/*
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_pregunta")
 	private Set<Pregunta> preguntas;
@@ -51,4 +61,5 @@ public class Recurso implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_control_vista")
 	private Set<Control_Vista> control_vistas;
+	*/
 }

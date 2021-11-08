@@ -1,11 +1,13 @@
 package org.adra.app.bi.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,9 +32,10 @@ public class Tipo_Recurso implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_tipo_recurso")
 	private int id;
+	
 	private String no_tipo_recurso;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="id_recurso")
-	private Set<Recurso> recursos;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipo_recurso")
+	//@JoinColumn(name="id_recurso")
+	private List<Recurso> recurso;
 }
