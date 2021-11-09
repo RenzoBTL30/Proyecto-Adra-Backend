@@ -36,7 +36,6 @@ public class Tipo_Recurso implements Serializable{
 	private int id;
 	private String no_tipo_recurso;
 	
-	
 	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tipo_recurso")
 	@JsonIgnore
 	//@JoinColumn(name="id_recurso")

@@ -1,6 +1,7 @@
 package org.adra.app.bi.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -40,37 +41,26 @@ public class Recurso implements Serializable{
 	private String di_url;
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name="id_sesion", referencedColumnName = "id_sesion")
 	private Sesion sesion;
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name="id_tipo_recurso", referencedColumnName = "id_tipo_recurso")
 	private Tipo_Recurso tipo_recurso;
 	
 	
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "recurso")
+	@JsonIgnore
+	//@JoinColumn(name="id_pregunta")
+	private List<Pregunta> pregunta;
 	
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "recurso")
+	@JsonIgnore
+	//@JoinColumn(name="id_control_vista")
+	private List<Control_Vista> control_vista;
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="id_pregunta")
-	private Set<Pregunta> preguntas;
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="id_control_vista")
-	private Set<Control_Vista> control_vistas;
-	*/
 }

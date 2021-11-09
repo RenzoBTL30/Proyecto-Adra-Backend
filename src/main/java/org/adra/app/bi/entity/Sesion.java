@@ -21,6 +21,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -50,21 +51,22 @@ public class Sesion implements Serializable{
 	private int ca_recursos;
 	private char es_sesion;
 	
-	/*
-	@ManyToOne
-	@JoinColumn(name="id_capacitacion", nullable = false)
-	private Capacitacion capacitacion;
-	*/
 	
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JoinColumn(name="id_capacitacion", referencedColumnName = "id_capacitacion")
+	private Capacitacion capacitacion;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "sesion")
 	@JsonIgnore
-	//@JoinColumn(name="id_recurso", nullable=false)
+	//@JoinColumn(name="id_recurso")
 	private List<Recurso> recurso;
 	
-	/*
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="id_sesion_socio")
-	private Set<Sesion_socio> sesion_socios;
-	*/
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "sesion")
+	@JsonIgnore
+	//@JoinColumn(name="id_sesion_socio")
+	private List<Sesion_socio> sesion_socio;
+	
+	
 }

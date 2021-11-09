@@ -1,17 +1,21 @@
 package org.adra.app.bi.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,7 +36,9 @@ public class Tipo_Capacitacion implements Serializable{
 	private int id;
 	private String no_tipo_capacitacion;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="id_capacitacion")
-	private Set<Capacitacion> capacitaciones;
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tipo_capacitacion")
+	@JsonIgnore
+	//@JoinColumn(name="id_capacitacion")
+	private List<Capacitacion> capacitacion;
+	
 }
