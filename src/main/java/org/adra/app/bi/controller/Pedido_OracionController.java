@@ -3,8 +3,8 @@ package org.adra.app.bi.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adra.app.bi.entity.Recurso;
-import org.adra.app.bi.serviceImpl.RecursoServiceImpl;
+import org.adra.app.bi.entity.Pedido_Oracion;
+import org.adra.app.bi.serviceImpl.Pedido_OracionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,17 +18,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/recursos")
-public class RecursoController {
+@RequestMapping("/api/pedidosoracion")
+public class Pedido_OracionController {
 	
 	@Autowired
-	private RecursoServiceImpl recursoService;
+	private Pedido_OracionServiceImpl pedido_oracionService;
 	
 	@GetMapping("/all")
-	public ResponseEntity<List<Recurso>> getRecursos(){
+	public ResponseEntity<List<Pedido_Oracion>> getPedido(){
 		try {
-			List<Recurso> list = new ArrayList<>();
-			list = recursoService.readAll();
+			List<Pedido_Oracion> list = new ArrayList<>();
+			list = pedido_oracionService.readAll();
 			if(list.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
@@ -40,10 +40,10 @@ public class RecursoController {
 	}
 	
 	@PostMapping("/post")
-	public ResponseEntity<Recurso> save(@RequestBody Recurso rec){
+	public ResponseEntity<Pedido_Oracion> save(@RequestBody Pedido_Oracion ped){
 		try {
-			Recurso re = recursoService.create(rec);
-			return new ResponseEntity<>(re, HttpStatus.CREATED);
+			Pedido_Oracion pe = pedido_oracionService.create(ped);
+			return new ResponseEntity<>(pe, HttpStatus.CREATED);
 		} catch (Exception e) {
 			// TODO: handle exception
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -51,10 +51,10 @@ public class RecursoController {
 	}
 	
 	@GetMapping("/all/{id}")
-	public ResponseEntity<Recurso> getRecurso(@PathVariable("id") int id){
-			Recurso recurso = recursoService.read(id);
-			if(recurso.getId()>0) {
-				return new ResponseEntity<>(recurso, HttpStatus.OK);
+	public ResponseEntity<Pedido_Oracion> getPedido(@PathVariable("id") int id){
+			Pedido_Oracion pedido = pedido_oracionService.read(id);
+			if(pedido.getId()>0) {
+				return new ResponseEntity<>(pedido, HttpStatus.OK);
 			}else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			} 
@@ -63,7 +63,7 @@ public class RecursoController {
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<HttpStatus> delete(@PathVariable("id") int id){
 		try {
-			recursoService.delete(id);
+			pedido_oracionService.delete(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -71,16 +71,14 @@ public class RecursoController {
 	}
 	
 	@PutMapping("/update/{id}")
-	public ResponseEntity<Recurso> update(@RequestBody Recurso re, @PathVariable("id") int id){
+	public ResponseEntity<Pedido_Oracion> update(@RequestBody Pedido_Oracion pe, @PathVariable("id") int id){
 		try {
-			Recurso ul = recursoService.read(id);
+			Pedido_Oracion ul = pedido_oracionService.read(id);
 			if (ul.getId()>0) {
-				ul.setNo_recurso(re.getNo_recurso());
-				ul.setNu_orden(re.getNu_orden());
-				ul.setDi_url(re.getDi_url());
-				ul.setSesion(re.getSesion());
-				ul.setTipo_recurso(re.getTipo_recurso());
-				return new ResponseEntity<>(recursoService.create(ul),HttpStatus.OK);
+				ul.setDe_pedido_oracion(pe.getDe_pedido_oracion());
+				ul.setFe_creacion(pe.getFe_creacion());
+				ul.setSocio(pe.getSocio());
+				return new ResponseEntity<>(pedido_oracionService.create(ul),HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}

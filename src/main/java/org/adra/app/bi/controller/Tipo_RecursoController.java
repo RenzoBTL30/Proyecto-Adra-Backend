@@ -3,8 +3,8 @@ package org.adra.app.bi.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adra.app.bi.entity.Recurso;
-import org.adra.app.bi.serviceImpl.RecursoServiceImpl;
+import org.adra.app.bi.entity.Tipo_Recurso;
+import org.adra.app.bi.serviceImpl.Tipo_RecursoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,17 +18,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/recursos")
-public class RecursoController {
+@RequestMapping("/api/tiposrecurso")
+public class Tipo_RecursoController {
 	
 	@Autowired
-	private RecursoServiceImpl recursoService;
+	private Tipo_RecursoServiceImpl tipo_recursoService;
 	
 	@GetMapping("/all")
-	public ResponseEntity<List<Recurso>> getRecursos(){
+	public ResponseEntity<List<Tipo_Recurso>> getTiposrecurso(){
 		try {
-			List<Recurso> list = new ArrayList<>();
-			list = recursoService.readAll();
+			List<Tipo_Recurso> list = new ArrayList<>();
+			list = tipo_recursoService.readAll();
 			if(list.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
@@ -40,10 +40,10 @@ public class RecursoController {
 	}
 	
 	@PostMapping("/post")
-	public ResponseEntity<Recurso> save(@RequestBody Recurso rec){
+	public ResponseEntity<Tipo_Recurso> save(@RequestBody Tipo_Recurso tip){
 		try {
-			Recurso re = recursoService.create(rec);
-			return new ResponseEntity<>(re, HttpStatus.CREATED);
+			Tipo_Recurso ti = tipo_recursoService.create(tip);
+			return new ResponseEntity<>(ti, HttpStatus.CREATED);
 		} catch (Exception e) {
 			// TODO: handle exception
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -51,10 +51,10 @@ public class RecursoController {
 	}
 	
 	@GetMapping("/all/{id}")
-	public ResponseEntity<Recurso> getRecurso(@PathVariable("id") int id){
-			Recurso recurso = recursoService.read(id);
-			if(recurso.getId()>0) {
-				return new ResponseEntity<>(recurso, HttpStatus.OK);
+	public ResponseEntity<Tipo_Recurso> getTipoRecurso(@PathVariable("id") int id){
+			Tipo_Recurso tiporec = tipo_recursoService.read(id);
+			if(tiporec.getId()>0) {
+				return new ResponseEntity<>(tiporec, HttpStatus.OK);
 			}else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			} 
@@ -63,7 +63,7 @@ public class RecursoController {
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<HttpStatus> delete(@PathVariable("id") int id){
 		try {
-			recursoService.delete(id);
+			tipo_recursoService.delete(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -71,16 +71,13 @@ public class RecursoController {
 	}
 	
 	@PutMapping("/update/{id}")
-	public ResponseEntity<Recurso> update(@RequestBody Recurso re, @PathVariable("id") int id){
+	public ResponseEntity<Tipo_Recurso> update(@RequestBody Tipo_Recurso tip, @PathVariable("id") int id){
 		try {
-			Recurso ul = recursoService.read(id);
+			Tipo_Recurso ul = tipo_recursoService.read(id);
 			if (ul.getId()>0) {
-				ul.setNo_recurso(re.getNo_recurso());
-				ul.setNu_orden(re.getNu_orden());
-				ul.setDi_url(re.getDi_url());
-				ul.setSesion(re.getSesion());
-				ul.setTipo_recurso(re.getTipo_recurso());
-				return new ResponseEntity<>(recursoService.create(ul),HttpStatus.OK);
+				ul.setNo_tipo_recurso(tip.getNo_tipo_recurso());
+				ul.setRecurso(tip.getRecurso());
+				return new ResponseEntity<>(tipo_recursoService.create(ul),HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}

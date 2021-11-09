@@ -1,6 +1,7 @@
 package org.adra.app.bi.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -19,9 +20,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Data
 @AllArgsConstructor
@@ -44,16 +48,21 @@ public class Sesion implements Serializable{
 	private Date fe_fin;
 	private int nu_orden;
 	private int ca_recursos;
+	private char es_sesion;
 	
 	/*
 	@ManyToOne
 	@JoinColumn(name="id_capacitacion", nullable = false)
 	private Capacitacion capacitacion;
+	*/
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sesion")
-	//@JoinColumn(name="id_recurso")
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "sesion")
+	@JsonIgnore
+	//@JoinColumn(name="id_recurso", nullable=false)
 	private List<Recurso> recurso;
 	
+	/*
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_sesion_socio")
 	private Set<Sesion_socio> sesion_socios;

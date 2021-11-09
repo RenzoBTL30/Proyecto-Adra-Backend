@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,10 +34,11 @@ public class Tipo_Recurso implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_tipo_recurso")
 	private int id;
-	
 	private String no_tipo_recurso;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipo_recurso")
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tipo_recurso")
+	@JsonIgnore
 	//@JoinColumn(name="id_recurso")
 	private List<Recurso> recurso;
 }

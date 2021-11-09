@@ -107,14 +107,14 @@ public class Application implements CommandLineRunner{
 		
 		// Listar pedido_oracion
 		
-		
+		/*
 		List<Pedido_Oracion> pedido_oraciones = pedido_oracionRepository.listaPedido();
 		System.out.println(); 
 		for(int i=0;i<pedido_oraciones.size(); i++) {
 			System.out.println(pedido_oraciones.get(i).getDe_pedido_oracion() + "\t" + pedido_oraciones.get(i).getFe_creacion() + "\t" + pedido_oraciones.get(i).getSocio().getPersona().getNo_persona());
 		}
 		System.out.println();
-		
+		*/
 		
 		// Buscar pedido_oracion
 		

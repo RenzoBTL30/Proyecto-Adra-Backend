@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,20 +38,30 @@ public class Recurso implements Serializable{
 	private String no_recurso;
 	private int nu_orden;
 	private String di_url;
-	private char es_recurso;
 	
-	/*
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnore
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name="id_sesion", referencedColumnName = "id_sesion")
 	private Sesion sesion;
-	*/
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name="id_tipo_recurso", referencedColumnName = "id_tipo_recurso")
 	private Tipo_Recurso tipo_recurso;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	/*

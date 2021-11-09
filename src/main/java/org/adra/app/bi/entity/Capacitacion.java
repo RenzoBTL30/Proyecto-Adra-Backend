@@ -34,6 +34,7 @@ public class Capacitacion implements Serializable{
 	private String no_capacitacion;
 	private String de_capacitacion;
 	private int ca_recursos;
+	private char es_capacitacion;
 	
 	@ManyToOne
 	@JoinColumn(name="id_tipo_capacitacion", nullable = false)
