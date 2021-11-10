@@ -51,8 +51,6 @@ public class Sesion implements Serializable{
 	private int ca_recursos;
 	private char es_sesion;
 	
-	
-	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name="id_capacitacion", referencedColumnName = "id_capacitacion")

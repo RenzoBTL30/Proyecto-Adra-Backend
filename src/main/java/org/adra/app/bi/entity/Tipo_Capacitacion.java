@@ -36,6 +36,7 @@ public class Tipo_Capacitacion implements Serializable{
 	private int id;
 	private String no_tipo_capacitacion;
 	
+	
 	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tipo_capacitacion")
 	@JsonIgnore
 	//@JoinColumn(name="id_capacitacion")

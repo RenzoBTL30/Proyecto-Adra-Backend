@@ -40,6 +40,7 @@ public class Usuario implements Serializable{
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@PrimaryKeyJoinColumn
 	private Persona persona;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usuario")

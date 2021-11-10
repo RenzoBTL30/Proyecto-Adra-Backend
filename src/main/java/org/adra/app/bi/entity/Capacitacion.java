@@ -55,5 +55,5 @@ public class Capacitacion implements Serializable{
 	@JsonIgnore
 	//@JoinColumn(name="id_afiliacion")
 	private List<Afiliacion> afiliacion;
-	
+
 }
