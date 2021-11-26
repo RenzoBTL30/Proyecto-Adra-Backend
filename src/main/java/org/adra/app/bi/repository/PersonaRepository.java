@@ -47,4 +47,5 @@ public interface PersonaRepository extends JpaRepository<Persona, Integer>{
 						@Param("p_vNU_TELEFONO") String p_vNU_TELEFONO,
 						@Param("p_nID_PERSONA") int p_nID_PERSONA
 						);
+				
 }

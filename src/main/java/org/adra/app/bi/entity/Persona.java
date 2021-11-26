@@ -1,6 +1,7 @@
 package org.adra.app.bi.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -35,7 +37,6 @@ public class Persona implements Serializable{
 	private String no_persona;
 	private String ap_paterno;
 	private String ap_materno;
-	private String nu_dni;
 	private String em_correo_electronico;
 	private String nu_telefono;
 	
@@ -46,4 +47,9 @@ public class Persona implements Serializable{
 	@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "persona")
 	@JsonIgnore
 	private Usuario usuario;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "persona")
+	@JsonIgnore
+	//@JoinColumn(name="id_anuncio")
+	private List<Anuncio> anuncio;
 }

@@ -35,12 +35,11 @@ public class Usuario_rol implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@JoinColumn(name="id_persona", referencedColumnName = "id_persona")
-	private Usuario usuario;
-	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name="id_rol", referencedColumnName = "id_rol")
 	private Rol rol;
 	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JoinColumn(name="id_usuario", referencedColumnName = "id_usuario")
+	private Usuario usuario;
 }

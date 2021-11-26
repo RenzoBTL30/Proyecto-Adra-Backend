@@ -2,7 +2,6 @@ package org.adra.app.bi.entity;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -35,12 +33,16 @@ public class Usuario implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_persona")
+	@Column(name = "id_usuario")
 	private int id;
+	@Column(name = "nu_dni")
+	private String dni;
+	private String de_contrasenia;
+	private char es_usuario;
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@PrimaryKeyJoinColumn
+	@JoinColumn(name="id_persona", referencedColumnName = "id_persona")
 	private Persona persona;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usuario")

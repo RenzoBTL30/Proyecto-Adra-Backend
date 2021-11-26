@@ -35,14 +35,15 @@ public class Sesion_socio implements Serializable{
 	private int nu_valoracion;
 	private int ca_recursos_vistos;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@JoinColumn(name="id_persona", referencedColumnName = "id_persona")
-	private Socio socio;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name="id_sesion", referencedColumnName = "id_sesion")
 	private Sesion sesion;
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JoinColumn(name="id_afiliacion", referencedColumnName = "id_afiliacion")
+	private Afiliacion afiliacion;
 	
 }

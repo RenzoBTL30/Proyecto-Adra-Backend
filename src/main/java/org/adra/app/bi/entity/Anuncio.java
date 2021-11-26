@@ -1,6 +1,7 @@
 package org.adra.app.bi.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -23,25 +26,24 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tbl_control_vista")
-public class Control_Vista implements Serializable{
+@Table(name = "tbl_anuncio")
+public class Anuncio implements Serializable{
 	
-	private static final long serialVersionUID = -962936564953879252L;
-
+	private static final long serialVersionUID = -962931364953879252L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_control_vista")
+	@Column(name = "id_anuncio")
 	private int id;
-	private String de_comentario;
-	private char es_visto;
+	private String no_anuncio;
+	private String di_anuncio;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fe_inicio;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fe_fin;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@JoinColumn(name="id_recurso", referencedColumnName = "id_recurso")
-	private Recurso recurso;
-	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@JoinColumn(name="id_afiliacion", referencedColumnName = "id_afiliacion")
-	private Afiliacion afiliacion;
+	@JoinColumn(name="id_persona", referencedColumnName = "id_persona")
+	private Persona persona;
 }

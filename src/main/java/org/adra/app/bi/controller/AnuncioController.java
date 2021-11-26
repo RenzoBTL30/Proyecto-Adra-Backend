@@ -3,6 +3,8 @@ package org.adra.app.bi.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adra.app.bi.entity.Anuncio;
+import org.adra.app.bi.serviceImpl.AnuncioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,22 +18,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import org.adra.app.bi.entity.Persona;
-import org.adra.app.bi.serviceImpl.PersonaServiceImpl;
-
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
-@RequestMapping("/api/personas")
-public class PersonaController {
-
+@RequestMapping("/api/anuncios")
+public class AnuncioController {
+	
 	@Autowired
-	private PersonaServiceImpl personaService;
+	private AnuncioServiceImpl anuncioService;
 	
 	@GetMapping("/all")
-	public ResponseEntity<List<Persona>> getPersona(){
+	public ResponseEntity<List<Anuncio>> getRecursos(){
 		try {
-			List<Persona> list = new ArrayList<>();
-			list = personaService.readAll();
+			List<Anuncio> list = new ArrayList<>();
+			list = anuncioService.readAll();
 			if(list.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
@@ -43,32 +42,31 @@ public class PersonaController {
 	}
 	
 	@PostMapping("/post")
-	public ResponseEntity<Persona> save(@RequestBody Persona per){
+	public ResponseEntity<Anuncio> save(@RequestBody Anuncio anc){
 		try {
-			Persona persona = personaService.create(per);
-			return new ResponseEntity<>(persona, HttpStatus.CREATED);
+			Anuncio an = anuncioService.create(anc);
+			return new ResponseEntity<>(an, HttpStatus.CREATED);
 		} catch (Exception e) {
 			// TODO: handle exception
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
-	
 	@GetMapping("/all/{id}")
-	public ResponseEntity<Persona> getUser(@PathVariable("id") int id){
-		Persona personas = personaService.read(id);
-			if(personas.getId()>0) {
-				return new ResponseEntity<>(personas, HttpStatus.OK);
+	public ResponseEntity<Anuncio> getRecurso(@PathVariable("id") int id){
+		Anuncio anuncio = anuncioService.read(id);
+			if(anuncio.getId()>0) {
+				return new ResponseEntity<>(anuncio, HttpStatus.OK);
 			}else {
-			
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			} 
 	}
 	
-	@DeleteMapping("/deletes/{id}")
+	
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<HttpStatus> delete(@PathVariable("id") int id){
 		try {
-			personaService.delete(id);
+			anuncioService.delete(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -76,23 +74,21 @@ public class PersonaController {
 	}
 	
 	@PutMapping("/update/{id}")
-	public ResponseEntity<Persona> update(@RequestBody Persona pc, @PathVariable("id") int id){
+	public ResponseEntity<Anuncio> update(@RequestBody Anuncio an, @PathVariable("id") int id){
 		try {
-			Persona p = personaService.read(id);
-			if(p.getId()>0) {
-				p.setNo_persona(pc.getNo_persona());
-				p.setAp_paterno(pc.getAp_paterno());
-				p.setAp_materno(pc.getAp_materno());
-				p.setEm_correo_electronico(pc.getEm_correo_electronico());
-				p.setNu_telefono(pc.getNu_telefono());
-				return new ResponseEntity<>(personaService.create(p),HttpStatus.OK);
-			}else {
+			Anuncio ul = anuncioService.read(id);
+			if (ul.getId()>0) {
+				ul.setNo_anuncio(an.getNo_anuncio());
+				ul.setDi_anuncio(an.getDi_anuncio());
+				ul.setFe_inicio(an.getFe_inicio());
+				ul.setFe_fin(an.getFe_fin());
+				ul.setPersona(an.getPersona());
+				return new ResponseEntity<>(anuncioService.create(ul),HttpStatus.OK);
+			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-			}			
-
+			}
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
 }

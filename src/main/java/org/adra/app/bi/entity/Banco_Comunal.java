@@ -2,7 +2,6 @@ package org.adra.app.bi.entity;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -40,7 +38,7 @@ public class Banco_Comunal implements Serializable{
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "banco_comunal")
 	@JsonIgnore
-	//@JoinColumn(name="id_persona")
+	//@JoinColumn(name="id_socio")
 	private List<Socio> socio;
 	
 }

@@ -41,7 +41,7 @@ public class Pedido_Oracion implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@JoinColumn(name="id_persona", referencedColumnName = "id_persona")
+	@JoinColumn(name="id_socio", referencedColumnName = "id_socio")
 	private Socio socio;
 	
 }

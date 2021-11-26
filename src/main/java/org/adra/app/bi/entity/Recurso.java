@@ -2,7 +2,6 @@ package org.adra.app.bi.entity;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -39,6 +38,7 @@ public class Recurso implements Serializable{
 	private String no_recurso;
 	private int nu_orden;
 	private String di_url;
+	private char es_recurso;
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)

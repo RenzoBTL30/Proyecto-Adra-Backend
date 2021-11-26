@@ -1,7 +1,6 @@
 package org.adra.app.bi.entity;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -30,12 +28,12 @@ import lombok.NoArgsConstructor;
 public class Socio {
 	
 	@Id
-	@Column(name="id_persona")
+	@Column(name="id_socio")
 	private int id;
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@PrimaryKeyJoinColumn
+	@JoinColumn(name="id_persona", referencedColumnName = "id_persona")
 	private Persona persona;
 	
 	
@@ -54,15 +52,4 @@ public class Socio {
 	@JsonIgnore
 	//@JoinColumn(name="id_afiliacion")
 	private List<Afiliacion> afiliacion;
-	
-	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "socio")
-	@JsonIgnore
-	//@JoinColumn(name="id_sesion_socio")
-	private List<Sesion_socio> sesion_socio;
-	
-	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "socio")
-	@JsonIgnore
-	//@JoinColumn(name="id_control_vista")
-	private List<Control_Vista> control_vista;
-	
 }
