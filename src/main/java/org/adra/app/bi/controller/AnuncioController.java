@@ -82,7 +82,6 @@ public class AnuncioController {
 				ul.setDi_anuncio(an.getDi_anuncio());
 				ul.setFe_inicio(an.getFe_inicio());
 				ul.setFe_fin(an.getFe_fin());
-				ul.setPersona(an.getPersona());
 				return new ResponseEntity<>(anuncioService.create(ul),HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);

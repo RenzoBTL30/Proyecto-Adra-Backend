@@ -3,6 +3,7 @@ package org.adra.app.bi.repository;
 import java.util.List;
 import java.util.Optional;
 
+import org.adra.app.bi.entity.Rol;
 import org.adra.app.bi.entity.Socio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -39,4 +40,10 @@ public interface SocioRepository extends JpaRepository<Socio, Integer>{
 	String actualizarSocio(
 			@Param("p_nID_PERSONA") int p_nID_PERSONA,
 			@Param("p_nID_BANCO_COMUNAL") int p_nID_BANCO_COMUNAL);
+	
+	@Query(value = "SELECT U.ID_USUARIO, (case when S.ID_SOCIO!=\"\" then \"Socio\" else \" \" end) AS SOCIO\r\n"
+			+ "FROM TBL_USUARIO U JOIN TBL_SOCIO S \r\n"
+			+ "ON U.ID_PERSONA = S.ID_PERSONA\r\n"
+			+ "WHERE U.ID_USUARIO = ?", nativeQuery = true)
+	List<Object> listarSocios(int id);
 }

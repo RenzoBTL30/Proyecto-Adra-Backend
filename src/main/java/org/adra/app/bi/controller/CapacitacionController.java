@@ -2,8 +2,10 @@ package org.adra.app.bi.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.adra.app.bi.entity.Capacitacion;
+import org.adra.app.bi.repository.CapacitacionRepository;
 import org.adra.app.bi.serviceImpl.CapacitacionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,6 +28,9 @@ public class CapacitacionController {
 	
 	@Autowired
 	private CapacitacionServiceImpl capacitacionService;
+	
+	@Autowired
+	private CapacitacionRepository capacitacionRepository;
 	
 	@GetMapping("/all")
 	public ResponseEntity<List<Capacitacion>> getRecursos(){
@@ -62,7 +68,7 @@ public class CapacitacionController {
 			} 
 	}
 	
-	
+	/*
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<HttpStatus> delete(@PathVariable("id") int id){
 		try {
@@ -71,7 +77,7 @@ public class CapacitacionController {
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-	}
+	}*/
 	
 	@PutMapping("/update/{id}")
 	public ResponseEntity<Capacitacion> update(@RequestBody Capacitacion ca, @PathVariable("id") int id){
@@ -88,6 +94,61 @@ public class CapacitacionController {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
 		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PutMapping("/delete/{id}")
+	public ResponseEntity<Capacitacion> delete(@RequestBody Capacitacion ca, @PathVariable("id") int id){
+		try {
+			Capacitacion ul = capacitacionService.read(id);
+			if (ul.getId()>0) {
+				ul.setEs_capacitacion('0');
+				return new ResponseEntity<>(capacitacionService.create(ul),HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PutMapping("/deleteSem/{id}")
+	public ResponseEntity<Capacitacion> deleteSem(@RequestBody Capacitacion ca, @PathVariable("id") int id){
+		try {
+			Capacitacion ul = capacitacionService.read(id);
+			if (ul.getId()>0) {
+				ul.setEs_capacitacion('0');
+				return new ResponseEntity<>(capacitacionService.create(ul),HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/*
+	@DeleteMapping("")
+	public String eliminarCapacitaciones(@RequestParam int id) {
+		try {
+			String resultado;
+			resultado = capacitacionService.eliminarCapacitaciones(id);
+			return resultado; 
+		} catch (Exception e) {
+			// TODO: handle exception
+			return resultado;
+		}
+	}*/
+	
+	@GetMapping("/list")
+	public ResponseEntity<List<Map<String, Object>>> listar(){
+		try {
+			List<Map<String, Object>> list = new ArrayList<>();
+			list = capacitacionRepository.listarSeminarios();
+			return new ResponseEntity<>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO: handle exception
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

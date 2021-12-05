@@ -32,10 +32,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner{
-	
 	
 	@Autowired
 	private AfiliacionRepository afiliacionRepository;
@@ -102,6 +102,8 @@ public class Application implements CommandLineRunner{
 	@SuppressWarnings("deprecation")
 	@Override
 	public void run(String... args) throws Exception {
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		System.out.println(bCryptPasswordEncoder.encode("101010").toString());
 		
 		// ---- TBL_PEDIDO_ORACION ----
 		
@@ -122,7 +124,6 @@ public class Application implements CommandLineRunner{
 		 /*
 		Pedido_Oracion pedido = pedido_oracionRepository.buscarPedido(4).get();
 		System.out.println("Pedido:" + pedido.getDe_pedido_oracion() + "\t" + pedido.getFe_creacion() + "\t");
-		
 		*/
 
 		
@@ -130,7 +131,6 @@ public class Application implements CommandLineRunner{
 		
 		/*
 		pedido_oracionRepository.insertarPedido("Orar por Tacna", 1);
-
 		*/
 		
 		
@@ -138,15 +138,13 @@ public class Application implements CommandLineRunner{
 		
 		/*
  		  pedido_oracionRepository.eliminarPedido(5);
-		 
-		 */
+		*/
 		
 		
 		// Actualizar pedido_oracion
 		
 		 /*
      	  pedido_oracionRepository.actualizarPedido("Orar por todoss", 1, 8);
-
 		 */
 		 
 		
@@ -174,7 +172,7 @@ public class Application implements CommandLineRunner{
 		/*		 
 		Tipo_Recurso tipo_recurso = tipo_recursoRepository.buscarTipoRecurso(5).get();
 		System.out.println("Tipo Recurso: " + tipo_recurso.getNo_tipo_recurso());
-			*/	
+		*/	
 		
 		
 				
@@ -182,15 +180,13 @@ public class Application implements CommandLineRunner{
 				
 		/*
 		   tipo_recursoRepository.insertarTipoRecurso("Evaluacion");
-			
 		*/
 				
 		// Eliminar tipo_recurso
 				
 		/*
 		   tipo_recursoRepository.eliminarTipoRecurso(7);
-			
-		 */
+		*/
 		    
 				
 				

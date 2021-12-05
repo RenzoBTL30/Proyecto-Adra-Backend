@@ -44,4 +44,11 @@ public class CapacitacionServiceImpl implements CapacitacionService {
 		return capacitacionRepository.save(capacitacion);
 	}
 
+	@Override
+	public String eliminarCapacitaciones(int id) {
+		// TODO Auto-generated method stub
+		return capacitacionRepository.eliminarCapacitacion(id);
+	}
+	
+	
 }

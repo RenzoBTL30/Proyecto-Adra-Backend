@@ -50,6 +50,6 @@ public class Persona implements Serializable{
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "persona")
 	@JsonIgnore
-	//@JoinColumn(name="id_anuncio")
-	private List<Anuncio> anuncio;
+	//@JoinColumn(name="id_banco_comunal")
+	private List<Banco_Comunal> banco_comunal;
 }

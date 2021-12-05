@@ -42,8 +42,4 @@ public class Anuncio implements Serializable{
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fe_fin;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@JoinColumn(name="id_persona", referencedColumnName = "id_persona")
-	private Persona persona;
 }

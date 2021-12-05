@@ -1,9 +1,11 @@
 package org.adra.app.bi.repository;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.adra.app.bi.entity.Capacitacion;
+import org.adra.app.bi.entity.Rol;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -43,5 +45,15 @@ public interface CapacitacionRepository extends JpaRepository<Capacitacion, Inte
 			@Param("p_nCA_RECURSOS") int p_nCA_RECURSOS,
 			@Param("p_nID_TIPO_CAPACITACION") int p_nID_TIPO_CAPACITACION,
 			@Param("p_nID_CAPACITACION") int p_nID_CAPACITACION);
+	
+	
+	@Query(value = "SELECT C.ID_CAPACITACION AS Id_cap, C.NO_CAPACITACION AS Nombre, S.ID_SESION AS Id_ses, S.DE_TEMA AS Tema, S.FE_INICIO AS FechaInicio, S.FE_FIN AS FechaFin, R.ID_RECURSO AS Id_rec, R.DI_URL AS Direccion\r\n"
+			+ "FROM TBL_CAPACITACION C JOIN TBL_SESION S\r\n"
+			+ "ON C.ID_CAPACITACION = S.ID_CAPACITACION\r\n"
+			+ "JOIN TBL_RECURSO R\r\n"
+			+ "ON S.ID_SESION = R.ID_SESION\r\n"
+			+ "WHERE C.ID_TIPO_CAPACITACION = 2 AND C.ES_CAPACITACION = 1;", nativeQuery = true)
+	List<Map<String, Object>> listarSeminarios();
+	
 	
 }

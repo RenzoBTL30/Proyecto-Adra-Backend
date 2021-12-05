@@ -32,7 +32,15 @@ public class Rol implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_rol")
 	private int id;
+	public Rol(String no_rol) {
+		super();
+		this.no_rol = no_rol;
+	}
+	
 	private String no_rol;
+	
+	
+	
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "rol")
 	@JsonIgnore

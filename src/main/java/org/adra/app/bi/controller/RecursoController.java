@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adra.app.bi.entity.Recurso;
+import org.adra.app.bi.entity.Sesion;
 import org.adra.app.bi.serviceImpl.RecursoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -62,6 +63,7 @@ public class RecursoController {
 			} 
 	}
 	
+	/*
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<HttpStatus> delete(@PathVariable("id") int id){
 		try {
@@ -70,7 +72,8 @@ public class RecursoController {
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-	}
+	}*/
+	
 	
 	@PutMapping("/update/{id}")
 	public ResponseEntity<Recurso> update(@RequestBody Recurso re, @PathVariable("id") int id){
@@ -82,6 +85,21 @@ public class RecursoController {
 				ul.setDi_url(re.getDi_url());
 				ul.setSesion(re.getSesion());
 				ul.setTipo_recurso(re.getTipo_recurso());
+				return new ResponseEntity<>(recursoService.create(ul),HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PutMapping("/delete/{id}")
+	public ResponseEntity<Recurso> delete(@RequestBody Recurso ca, @PathVariable("id") int id){
+		try {
+			Recurso ul = recursoService.read(id);
+			if (ul.getId()>0) {
+				ul.setEs_recurso('0');
 				return new ResponseEntity<>(recursoService.create(ul),HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);

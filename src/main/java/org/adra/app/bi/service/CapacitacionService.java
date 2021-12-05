@@ -10,4 +10,5 @@ public interface CapacitacionService {
 	Capacitacion read(int id);
 	void delete(int id);
 	Capacitacion update(Capacitacion capacitacion);
+	String eliminarCapacitaciones(int id);
 }
