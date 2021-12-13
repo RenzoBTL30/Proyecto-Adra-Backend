@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -41,8 +42,10 @@ public class Sesion implements Serializable{
 	
 	private String de_tema;
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, locale = "es_PE", timezone = "America/Lima")
 	private Date fe_inicio;
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, locale = "es_PE", timezone = "America/Lima")
 	private Date fe_fin;
 	private int nu_orden;
 	private int ca_recursos;

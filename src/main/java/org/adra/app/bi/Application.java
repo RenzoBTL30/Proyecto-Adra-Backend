@@ -103,7 +103,7 @@ public class Application implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-		System.out.println(bCryptPasswordEncoder.encode("101010").toString());
+		System.out.println(bCryptPasswordEncoder.encode("090909").toString());
 		
 		// ---- TBL_PEDIDO_ORACION ----
 		

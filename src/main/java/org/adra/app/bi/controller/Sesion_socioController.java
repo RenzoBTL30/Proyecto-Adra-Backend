@@ -90,4 +90,14 @@ public class Sesion_socioController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@PutMapping("/updatevaloracion/{idafil}/{idses}/{nuvalor}/{coment}")
+	public String actualizarVisto(@PathVariable("idafil") int idafil, @PathVariable("idses") int idses, @PathVariable("nuvalor") int nuvalor, @PathVariable("coment") String coment ){
+		try {
+			String result = sesion_socioService.actualizarValoracion(idafil, idses, nuvalor, coment);
+			return result;
+		} catch (Exception e) {
+			return null;
+		}
+	}
 }

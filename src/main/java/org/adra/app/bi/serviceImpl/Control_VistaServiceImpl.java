@@ -44,4 +44,10 @@ public class Control_VistaServiceImpl implements Control_VistaService {
 		return control_vistaRepository.save(control_vista);
 	}
 
+	@Override
+	public String actualizarVisto(int param1, int param2) {
+		// TODO Auto-generated method stub
+		return control_vistaRepository.actualizarVisto(param1, param2);
+	}
+
 }

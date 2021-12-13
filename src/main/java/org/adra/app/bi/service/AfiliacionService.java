@@ -10,4 +10,5 @@ public interface AfiliacionService {
 	Afiliacion read(int id);
 	void delete(int id);
 	Afiliacion update(Afiliacion afiliacion);
+	String asignarAfiliacion(String param1, String param2);
 }

@@ -40,4 +40,8 @@ public interface Sesion_socioRepository extends JpaRepository<Sesion_socio, Inte
 					@Param("p_nCA_RECURSOS_VISTOS") int p_nCA_RECURSOS_VISTOS,
 					@Param("p_nID_PERSONA") int p_nID_PERSONA,
 					@Param("P_nID_SESION") int P_nID_SESION);
+				
+				
+				@Query(value = "{call SP_UPD_VALORACION_SOCIO(?, ?, ?, ?)}", nativeQuery = true) 
+				String actualizarValoracion(int p_nID_AFILIACION, int p_nID_SESION, int p_nNU_VALORACION, String p_nDE_COMENTARIO);
 }

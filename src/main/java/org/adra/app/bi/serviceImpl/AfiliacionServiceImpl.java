@@ -44,4 +44,10 @@ public class AfiliacionServiceImpl implements AfiliacionService {
 		return afiliacionRepository.save(afiliacion);
 	}
 
+	@Override
+	public String asignarAfiliacion(String param1, String param2) {
+		// TODO Auto-generated method stub
+		return afiliacionRepository.asignarAfiliacion(param1, param2);
+	}
+
 }

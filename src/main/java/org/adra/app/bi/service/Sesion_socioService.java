@@ -10,4 +10,5 @@ public interface Sesion_socioService {
 	Sesion_socio read(int id);
 	void delete(int id);
 	Sesion_socio update(Sesion_socio sesion_socio);
+	String actualizarValoracion(int param1, int param2, int param3, String param4);
 }

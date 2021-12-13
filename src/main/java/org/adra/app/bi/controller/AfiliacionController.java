@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.adra.app.bi.entity.Afiliacion;
+import org.adra.app.bi.repository.AfiliacionRepository;
 import org.adra.app.bi.serviceImpl.AfiliacionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,6 +27,9 @@ public class AfiliacionController {
 	
 	@Autowired
 	private AfiliacionServiceImpl afiliacionService;
+	
+	@Autowired
+	private AfiliacionRepository afiliacionRepository;
 	
 	@GetMapping("/all")
 	public ResponseEntity<List<Afiliacion>> getRecursos(){
@@ -87,6 +92,17 @@ public class AfiliacionController {
 			}
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping("/asignar/{idcap}/{idbanc}")
+	public String asignar(@PathVariable("idcap") String idcap, @PathVariable("idbanc") String idbanc ){
+		try {
+			String res = afiliacionService.asignarAfiliacion(idcap, idbanc);
+			return res;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
 		}
 	}
 }

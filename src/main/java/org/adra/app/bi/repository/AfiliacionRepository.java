@@ -36,4 +36,9 @@ public interface AfiliacionRepository extends JpaRepository<Afiliacion, Integer>
 				@Query(value = "{call SP_UPD_TBL_AFILIACION(:p_nID_AFILIACION,:p_nCA_RECURSOS_VISTOS, :p_nID_PERSONA, :p_nID_CAPACITACION, @V_OK)}", nativeQuery = true) 
 				String actualizarAfiliacion(@Param("p_nID_AFILIACION") int p_nID_AFILIACION,@Param("p_nCA_RECURSOS_VISTOS") int p_nCA_RECURSOS_VISTOS ,
 				@Param("p_nID_PERSONA") int p_nID_PERSONA,@Param("p_nID_CAPACITACION") int p_nID_CAPACITACION);
+				
+				
+				// Logica para asignar
+				@Query(value = "{call SP_INS_AFIL_SOCIOS(?, ?)}", nativeQuery = true) 
+				String asignarAfiliacion(String p_nID_CAPACITACION, String p_nID_BANCO_COMUNAL);
 }

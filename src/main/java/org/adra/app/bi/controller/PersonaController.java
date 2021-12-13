@@ -2,6 +2,7 @@ package org.adra.app.bi.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.adra.app.bi.entity.Persona;
+import org.adra.app.bi.repository.PersonaRepository;
 import org.adra.app.bi.serviceImpl.PersonaServiceImpl;
 
 @RestController
@@ -26,6 +28,9 @@ public class PersonaController {
 
 	@Autowired
 	private PersonaServiceImpl personaService;
+	
+	@Autowired
+	private PersonaRepository personaRepository;
 	
 	@GetMapping("/all")
 	public ResponseEntity<List<Persona>> getPersona(){
@@ -65,7 +70,7 @@ public class PersonaController {
 			} 
 	}
 	
-	@DeleteMapping("/deletes/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<HttpStatus> delete(@PathVariable("id") int id){
 		try {
 			personaService.delete(id);
@@ -95,4 +100,51 @@ public class PersonaController {
 		}
 	}
 	
+	@GetMapping("/listaCapacAsesor/{id}")
+	public ResponseEntity<List<Map<String, Object>>> listaCapacAsesor(@PathVariable("id") int id){
+		try {
+			List<Map<String, Object>> list = new ArrayList<>();
+			list = personaRepository.listaCapacAsesor(id);
+			return new ResponseEntity<>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/listaSociosModuloAsesor/{idcap}/{idper}")
+	public ResponseEntity<List<Map<String, Object>>> listaSociosModuloAsesor(@PathVariable("idcap") int idcap, @PathVariable("idper") int idper){
+		try {
+			List<Map<String, Object>> list = new ArrayList<>();
+			list = personaRepository.listaSociosModuloAsesor(idcap,idper);
+			return new ResponseEntity<>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/listaProgresoPorSesiones/{idsoc}/{idcap}")
+	public ResponseEntity<List<Map<String, Object>>> listaProgresoPorSesiones(@PathVariable("idsoc") int idsoc, @PathVariable("idcap") int idcap){
+		try {
+			List<Map<String, Object>> list = new ArrayList<>();
+			list = personaRepository.listaProgresoPorSesiones(idsoc,idcap);
+			return new ResponseEntity<>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/listaRecursos/{idsoc}/{idses}")
+	public ResponseEntity<List<Map<String, Object>>> listaRecursos(@PathVariable("idsoc") int idsoc, @PathVariable("idses") int idses){
+		try {
+			List<Map<String, Object>> list = new ArrayList<>();
+			list = personaRepository.listaRecursos(idsoc,idses);
+			return new ResponseEntity<>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

@@ -78,7 +78,6 @@ public class Tipo_RecursoController {
 			Tipo_Recurso ul = tipo_recursoService.read(id);
 			if (ul.getId()>0) {
 				ul.setNo_tipo_recurso(tip.getNo_tipo_recurso());
-				ul.setRecurso(tip.getRecurso());
 				return new ResponseEntity<>(tipo_recursoService.create(ul),HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);

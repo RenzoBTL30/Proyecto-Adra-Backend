@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "spring.datasource.hikari.maxLifeTime",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.hikari.maxLifeTime'"
+  },
+  {
+    "name": "spring.datasource.hikari.maxLifeTime",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.hikari.maxLifeTime'"
+  },
+  {
+    "name": "spring.datasource.hikari.maxLifeTime",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.hikari.maxLifeTime'"
+  },
+  {
+    "name": "spring.datasource.hikari.maxLifeTime",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.hikari.maxLifeTime'"
+  }
+]}

@@ -44,4 +44,10 @@ public class Sesion_socioServiceImpl implements Sesion_socioService {
 		return sesion_socioRepository.save(sesion_socio);
 	}
 
+	@Override
+	public String actualizarValoracion(int param1, int param2, int param3, String param4) {
+		// TODO Auto-generated method stub
+		return sesion_socioRepository.actualizarValoracion(param1, param2, param3, param4);
+	}
+
 }

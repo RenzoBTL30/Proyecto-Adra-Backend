@@ -2,8 +2,10 @@ package org.adra.app.bi.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.adra.app.bi.entity.Pedido_Oracion;
+import org.adra.app.bi.repository.Pedido_OracionRepository;
 import org.adra.app.bi.serviceImpl.Pedido_OracionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,9 @@ public class Pedido_OracionController {
 	
 	@Autowired
 	private Pedido_OracionServiceImpl pedido_oracionService;
+	
+	@Autowired
+	private Pedido_OracionRepository pedido_oracionRepository;
 	
 	@GetMapping("/all")
 	public ResponseEntity<List<Pedido_Oracion>> getPedido(){
@@ -85,6 +90,18 @@ public class Pedido_OracionController {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
 		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/listarPedidosBancoAsesor/{id}")
+	public ResponseEntity<List<Map<String, Object>>> listarPedidosBancoAsesor(@PathVariable("id") int id){
+		try {
+			List<Map<String, Object>> list = new ArrayList<>();
+			list = pedido_oracionRepository.listarPedidosBancoAsesor(id);
+			return new ResponseEntity<>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO: handle exception
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

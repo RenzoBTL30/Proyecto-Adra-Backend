@@ -38,4 +38,8 @@ public interface Control_VistaRepository extends JpaRepository<Control_Vista, In
 										   @Param("p_cES_VISTO") String p_cES_VISTO,
 										   @Param("p_nID_PERSONA") int p_nID_PERSONA,
 										   @Param("p_nID_RECURSO") int p_nID_RECURSO);
+				
+				
+				@Query(value = "{call SP_UPD_VISTO_RECURSO(?, ?)}", nativeQuery = true) 
+				String actualizarVisto(int p_nID_AFILIACION, int p_nID_RECURSO);
 }

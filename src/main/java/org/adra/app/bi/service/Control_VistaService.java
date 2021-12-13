@@ -10,4 +10,5 @@ public interface Control_VistaService {
 	Control_Vista read(int id);
 	void delete(int id);
 	Control_Vista update(Control_Vista control_vista);
+	String actualizarVisto(int param1, int param2);
 }

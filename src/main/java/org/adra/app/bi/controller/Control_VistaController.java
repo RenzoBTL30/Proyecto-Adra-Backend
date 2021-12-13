@@ -90,4 +90,29 @@ public class Control_VistaController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@PutMapping("/updatevisto/{idafil}/{idrec}")
+	public String actualizarVisto(@PathVariable("idafil") int idafil, @PathVariable("idrec") int idrec ){
+		try {
+			String result = control_vistaService.actualizarVisto(idafil, idrec);
+			return result;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	@PutMapping("/updatecomentario/{id}")
+	public ResponseEntity<Control_Vista> updatecomentario(@RequestBody Control_Vista ca, @PathVariable("id") int id){
+		try {
+			Control_Vista ul = control_vistaService.read(id);
+			if (ul.getId()>0) {
+				ul.setDe_comentario(ca.getDe_comentario());
+				return new ResponseEntity<>(control_vistaService.create(ul),HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }
